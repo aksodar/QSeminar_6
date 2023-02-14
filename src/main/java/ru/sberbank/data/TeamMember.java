@@ -61,4 +61,13 @@ public abstract class TeamMember {
         this.currentTask = null;
         this.isFree = true;
     }
+
+    @Override
+    public String toString() {
+        return "TeamMember{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                '}';
+    }
 }
