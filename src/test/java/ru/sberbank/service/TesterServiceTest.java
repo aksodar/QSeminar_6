@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import ru.sberbank.data.Tester;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 class TesterServiceTest {
@@ -122,5 +123,15 @@ class TesterServiceTest {
         Tester actual = testerService.get("One", "Tester");
         //result
         Assertions.assertEquals(actual, expected);
+    }
+
+    @Test
+    void getListOfFreeTest_successfully() {
+        //expected
+        List<Tester> expected = Collections.emptyList();
+        //actual
+        List<Tester> actual = testerService.getListOfFree();
+        //result
+        Assertions.assertIterableEquals(actual, expected);
     }
 }
