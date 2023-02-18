@@ -17,4 +17,7 @@ public class Developer extends TeamMember {
 
         return task;
     }
+
+    public void setFree(boolean b) {
+    }
 }

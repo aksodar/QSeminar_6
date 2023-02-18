@@ -16,4 +16,7 @@ public class Tester extends TeamMember{
 
         return task;
     }
+
+    public void setFree(boolean b) {
+    }
 }
