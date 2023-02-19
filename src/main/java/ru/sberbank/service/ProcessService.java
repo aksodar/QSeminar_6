@@ -24,6 +24,10 @@ public class ProcessService {
         return createdTask.getId();
     }
 
+    /**
+     * @param id
+     * @return
+     */
     public Task pushStatusTask(int id){
         Task task = taskService.getTask(id);
         if(task.isDeveloped() && task.isTested()){
@@ -43,7 +47,7 @@ public class ProcessService {
         if(!task.isTested()){
             List<Tester> testers = testerService.getListOfFree();
             if(testers.isEmpty()){
-                throw new IllegalStateException("Нет свободных разработчиков!");
+                throw new IllegalStateException("Нет свободных тестировщиков!");
             }
             Tester tester = testers.get(0);
             tester.addTask(task);

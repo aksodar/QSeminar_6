@@ -11,6 +11,7 @@ public abstract class TeamMember {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
+        this.isFree = true;
     }
 
     public Task getCurrentTask() {
