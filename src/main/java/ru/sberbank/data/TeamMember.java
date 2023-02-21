@@ -11,6 +11,7 @@ public abstract class TeamMember {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
+        this.isFree = true;
     }
 
     public Task getCurrentTask() {
@@ -19,6 +20,10 @@ public abstract class TeamMember {
 
     public boolean isFree() {
         return isFree;
+    }
+
+    public void setFree(boolean b) {
+        isFree = b;
     }
 
     public String getFirstName() {
