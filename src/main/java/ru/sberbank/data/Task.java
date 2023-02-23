@@ -36,4 +36,22 @@ public class Task {
     public String getSummary() {
         return summary;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Task task = (Task) o;
+
+        if (id != task.id) return false;
+        return summary.equals(task.summary);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + summary.hashCode();
+        return result;
+    }
 }
