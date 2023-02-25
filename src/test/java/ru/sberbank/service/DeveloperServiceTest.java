@@ -22,9 +22,6 @@ class DeveloperServiceTest {
     final String FIRST_NAME_B = "Jane";
     final String SECOND_NAME_B = "Daw";
 
-//    final int ID_C = 6534;
-//    final String FIRST_NAME_C = "Jane";
-//    final String SECOND_NAME_C = "Goe";
 
     @BeforeEach
     void setUp() {
