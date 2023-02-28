@@ -77,10 +77,28 @@ class TesterServiceTest {
 
 
     @Test
-    void getTest_failWithException() {
+    void getTest_failWithExceptionInvalidInputParameterForName() {
 
         String firstName = "Igor";
         String secondName = "Ivanov";
+        String expectedMessage = "Тестировщики не найдены";
+
+        Tester tester = new Tester(1, "Ivan", "Ivanov");
+        testerService.list.add(tester);
+
+        IllegalStateException exception = assertThrows(IllegalStateException.class,
+                () -> {
+                    testerService.get(firstName, secondName);
+                });
+
+        assertEquals(expectedMessage, exception.getMessage());
+    }
+
+    @Test
+    void getTest_failWithExceptionInvalidInputParameterForSecond() {
+
+        String firstName = "Ivan";
+        String secondName = "Yegorovich";
         String expectedMessage = "Тестировщики не найдены";
 
         Tester tester = new Tester(1, "Ivan", "Ivanov");
