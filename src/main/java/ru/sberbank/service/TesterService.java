@@ -23,7 +23,12 @@ public class TesterService extends AbstractStorage<Tester> implements DataServic
     @Override
     public Tester get(String firstName, String secondName) throws IllegalStateException {
         for (Tester t: list)  {
-            if(firstName.equalsIgnoreCase(t.getFirstName()) && secondName.equalsIgnoreCase(t.getFirstName())) {
+            /*
+            secondName.equalsIgnoreCase(t.getFirstName()) --> secondName.equalsIgnoreCase(t.getSecondName())
+            На эти изменения нужно было сделать отдельный pull request?
+            Это можно отнести к "мы не делаем изменения в прод, вместе с тестами"?
+            */
+            if(firstName.equalsIgnoreCase(t.getFirstName()) && secondName.equalsIgnoreCase(t.getSecondName())) {
                 return t;
             }
         }
