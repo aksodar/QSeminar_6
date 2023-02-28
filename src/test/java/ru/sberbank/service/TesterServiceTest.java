@@ -5,17 +5,18 @@ import ru.sberbank.data.Task;
 import ru.sberbank.data.Tester;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TesterServiceTest {
 
+    private final TesterService testerService = new TesterService();
+
     @Test
-    void createTestFailWithExceptionInputParameterNullForFirstName() {
+    void createTest_failWithExceptionInputParameterNullForFirstName() {
 
         String expectedMessage = "Входные данные не валидны";
-
-        TesterService testerService = new TesterService();
 
         IllegalStateException exception = assertThrows(IllegalStateException.class,
                 () -> {
@@ -26,11 +27,9 @@ class TesterServiceTest {
     }
 
     @Test
-    void createTestFailWithExceptionInputParameterNullForSecondName() {
+    void createTest_failWithExceptionInputParameterNullForSecondName() {
 
         String expectedMessage = "Входные данные не валидны";
-
-        TesterService testerService = new TesterService();
 
         IllegalStateException exception = assertThrows(IllegalStateException.class,
                 () -> {
@@ -41,11 +40,9 @@ class TesterServiceTest {
     }
 
     @Test
-    void createTestFailWithExceptionInputParameterEmptyStringForFirstName() {
+    void createTest_failWithExceptionInputParameterEmptyStringForFirstName() {
 
         String expectedMessage = "Входные данные не валидны";
-
-        TesterService testerService = new TesterService();
 
         IllegalStateException exception = assertThrows(IllegalStateException.class,
                 () -> {
@@ -56,11 +53,9 @@ class TesterServiceTest {
     }
 
     @Test
-    void createTestFailWithExceptionInputParameterEmptyStringForSecondName() {
+    void createTest_failWithExceptionInputParameterEmptyStringForSecondName() {
 
         String expectedMessage = "Входные данные не валидны";
-
-        TesterService testerService = new TesterService();
 
         IllegalStateException exception = assertThrows(IllegalStateException.class,
                 () -> {
@@ -71,11 +66,9 @@ class TesterServiceTest {
     }
 
     @Test
-    void createTestSuccessfully() {
+    void createTest_successfully() {
 
         Tester expectedTester = new Tester(1, "Ivan", "Ivanov");
-
-        TesterService testerService = new TesterService();
 
         Tester actualTester = testerService.create(1, "Ivan", "Ivanov");
 
@@ -84,12 +77,11 @@ class TesterServiceTest {
 
 
     @Test
-    void getTestFailWithException() {
+    void getTest_failWithException() {
+
         String firstName = "Igor";
         String secondName = "Ivanov";
         String expectedMessage = "Тестировщики не найдены";
-
-        TesterService testerService = new TesterService();
 
         Tester tester = new Tester(1, "Ivan", "Ivanov");
         testerService.list.add(tester);
@@ -103,11 +95,10 @@ class TesterServiceTest {
     }
 
     @Test
-    void getTestSuccessfully() {
+    void getTest_successfully() {
+
         String firstName = "Ivan";
         String secondName = "Ivanov";
-
-        TesterService testerService = new TesterService();
 
         Tester expectedTester = new Tester(1, "Ivan", "Ivanov");
         testerService.list.add(expectedTester);
@@ -118,23 +109,24 @@ class TesterServiceTest {
     }
 
     @Test
-    void getListOfFreeSuccessfully() {
+    void getListOfFree_successfully() {
 
-        TesterService testerService = new TesterService();
-        Tester expectedTester = new Tester(1, "Ivan", "Ivanov");
-        Tester testerSecond = new Tester(2, "Igor", "Igorevich");
+        List<Tester> expectedFreeTesterList = new ArrayList<>();
+        Tester testerFirst = new Tester(1, "Ivan", "Ivanov");
+        Tester testerSecond = new Tester(2, "Igor", "Yegorovich");
         Task task = new Task(1, "Резюме");
 
-        expectedTester.addTask(task);
-        expectedTester.checkTask();
+        expectedFreeTesterList.add(testerFirst);
+
+        testerFirst.addTask(task);
+        testerFirst.checkTask();
         testerSecond.addTask(task);
 
-        testerService.list.add(expectedTester);
+        testerService.list.add(testerFirst);
         testerService.list.add(testerSecond);
 
-        ArrayList<Tester> freeTester = testerService.getListOfFree();
-        Tester actualTester = freeTester.get(0);
+        ArrayList<Tester> actualFreeTesterList = testerService.getListOfFree();
 
-        assertEquals(expectedTester, actualTester);
+        assertIterableEquals(expectedFreeTesterList, actualFreeTesterList);
     }
 }
