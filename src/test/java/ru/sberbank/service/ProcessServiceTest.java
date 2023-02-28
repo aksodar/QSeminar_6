@@ -19,8 +19,8 @@ class ProcessServiceTest {
     private final int EXPECTED_TASK_ID = 0;
     private final int EXPECTED_FINAL_TASK_ID = 1;
     private final String EXPECTED_TASK_SUMMARY = "Тестовая задача";
-    private ArrayList<Developer> developers = new ArrayList<>();
-    private ArrayList<Tester> testers = new ArrayList<>();
+    private ArrayList<Developer> developers;
+    private ArrayList<Tester> testers;
     private TaskService taskService;
 
     @BeforeEach
@@ -35,6 +35,8 @@ class ProcessServiceTest {
 
         TesterService testerService = mock(TesterService.class);
 
+        developers = new ArrayList<>();
+        testers = new ArrayList<>();
         when(developerService.getListOfFree()).thenReturn(developers);
         when(testerService.getListOfFree()).thenReturn(testers);
 
