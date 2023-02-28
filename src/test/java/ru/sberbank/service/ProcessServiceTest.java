@@ -21,20 +21,15 @@ class ProcessServiceTest {
     private final String EXPECTED_TASK_SUMMARY = "Тестовая задача";
     private ArrayList<Developer> developers = new ArrayList<>();
     private ArrayList<Tester> testers = new ArrayList<>();
+    private TaskService taskService;
 
     @BeforeEach
     void setUp() {
         Task expectedTask = new Task(EXPECTED_TASK_ID, EXPECTED_TASK_SUMMARY);
 
-        TaskService taskService = mock(TaskService.class);
+        taskService = mock(TaskService.class);
         when(taskService.createTask(EXPECTED_TASK_ID, EXPECTED_TASK_SUMMARY)).thenReturn(expectedTask);
         when(taskService.getTask(EXPECTED_TASK_ID)).thenReturn(expectedTask);
-
-        Task expectedTaskFinal = new Task(EXPECTED_FINAL_TASK_ID, EXPECTED_TASK_SUMMARY);
-        expectedTaskFinal.setDeveloped(true);
-        expectedTaskFinal.setTested(true);
-
-        when(taskService.getTask(EXPECTED_FINAL_TASK_ID)).thenReturn(expectedTaskFinal);
 
         DeveloperService developerService = mock(DeveloperService.class);
 
@@ -54,6 +49,12 @@ class ProcessServiceTest {
 
     @Test
     void pushStatusTask_failStatusException() {
+        Task expectedTaskFinal = new Task(EXPECTED_FINAL_TASK_ID, EXPECTED_TASK_SUMMARY);
+        expectedTaskFinal.setDeveloped(true);
+        expectedTaskFinal.setTested(true);
+
+        when(taskService.getTask(EXPECTED_FINAL_TASK_ID)).thenReturn(expectedTaskFinal);
+
         String expectedString = "Задача уже в финальном статусе!";
         Exception exception = Assertions.assertThrows(
                 IllegalStateException.class,
